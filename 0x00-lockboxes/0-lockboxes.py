@@ -6,7 +6,7 @@ def canUnlockAll(boxes):
 
     if not boxes:
         return False
-    if len(boxes) == 0:
+    if len(boxes) is 0:
         return True
     boxes[0].append(0)
     boxes[0] = list(set(boxes[0]))
