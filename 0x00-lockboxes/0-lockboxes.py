@@ -1,14 +1,23 @@
 #!/usr/bin/python3
 def canUnlockAll(boxes):
-    '''box key'''
+    '''
+    Method that determines if all the boxes can be opened.
+    Args:
+        boxes (lst): List of all the boxes.
+    Returns:
+        True (bool): for success,
+        False (bool): In case of failure.
+    '''
+    if (type(boxes) is not list):
+        return False
+
+    if (len(boxes) == 0):
+        return False
+
     f = list(range(1, len(boxes)))
     ff = []
     a = True
-
-    if not boxes:
-        return False
-    if len(boxes) is 0:
-        return True
+    
     while a:
         for x in boxes[0]:
             if x > len(boxes):
