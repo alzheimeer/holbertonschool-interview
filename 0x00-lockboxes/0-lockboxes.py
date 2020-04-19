@@ -4,6 +4,8 @@
 
 def canUnlockAll(boxes):
 
+    if not boxes:
+        return False
     if len(boxes) == 0:
         return True
     boxes[0].append(0)
