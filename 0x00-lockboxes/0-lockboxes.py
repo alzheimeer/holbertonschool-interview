@@ -1,11 +1,14 @@
 #!/usr/bin/python3
-
 def canUnlockAll(boxes):
-
+    '''box key'''
     f = list(range(1, len(boxes)))
     ff = []
     a = True
 
+    if not boxes:
+        return False
+    if len(boxes) is 0:
+        return True
     while a:
         for x in boxes[0]:
             if x > len(boxes):
@@ -15,7 +18,7 @@ def canUnlockAll(boxes):
                 ff.append(x)
                 ff = list(set(ff))
             for y in boxes[x]:
-                if (x != None) and (y < len(boxes) and y != 0):
+                if (x is not None) and (y < len(boxes) and y != 0):
                     boxes[0] = boxes[0] + boxes[x]
                     boxes[0] = list(set(boxes[0]))
                     for z in boxes[0]:
