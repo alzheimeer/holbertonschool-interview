@@ -8,6 +8,8 @@ def canUnlockAll(boxes):
         True (bool): for success,
         False (bool): In case of failure.
     '''
+    if (len(boxes) == 0):
+        return False
     box = list(range(len(boxes)))
     keys = [False]*len(boxes)
     keys[0] = True
