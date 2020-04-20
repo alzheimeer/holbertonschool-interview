@@ -17,8 +17,8 @@ def canUnlockAll(boxes):
         if k in box:
             keys[k] = True
 
-    for c in range(len(boxes)-2):
-        for i in range(1, len(boxes)):
+    for c in range(len(boxes)):
+        for i in range(len(boxes)):
             if keys[i] is True:
                 for k in boxes[i]:
                     if k in box:
