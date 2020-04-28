@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
 
 /**
@@ -10,43 +8,36 @@
  */
 listint_t *insert_node(listint_t **head, int number)
 {
+	listint_t *newnode, *head2;
 
-	listint_t *new;
-	listint_t *prev;
-
-	prev = *head;
-	new = malloc(sizeof(listint_t));
-	if (new == NULL)
+	head2 = *head;
+	newnode = malloc(sizeof(listint_t));
+	if (newnode == NULL)
 		return (NULL);
-	new->n = number;
+	newnode->n = number;
 	if (*head == NULL)
 	{
-		new->next = NULL;
-		*head = new;
-		return (new);
+		newnode->next = NULL;
+		*head = newnode;
+		return (newnode);
 	}
-
-	while (prev)
+	if (head2->n > newnode->n)
 	{
-		if (prev->n > new->n)
-		{
-			new->next = prev;
-			*head = new;
-			return (new);
-		}
-		if (prev->n < new->n && prev->next->n > new->n)
-		{
-			new->next = prev->next;
-			prev->next = new;
-			return (new);
-		}
-		if (prev->next == NULL)
-		{
-			new->next = NULL;
-			prev->next = new;
-			return (new);
-		}
-		prev = prev->next;
+		newnode->next = *head;
+		*head = newnode;
+		return (newnode);
 	}
-	return (new);
+	while (head2->next != NULL)
+	{
+		if (head2->next->n >= newnode->n)
+		{
+			newnode->next = head2->next;
+			head2->next = newnode;
+			return (newnode);
+		}
+		head2 = head2->next;
+	}
+	newnode->next = head2->next;
+	head2->next = newnode;
+	return (newnode);
 }
