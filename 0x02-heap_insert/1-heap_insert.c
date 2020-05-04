@@ -8,10 +8,19 @@
 */
 heap_t *heap_insert(heap_t **root, int value)
 {
+    heap_t *nodo;
+
+    nodo = malloc(sizeof(heap_t));
+    if (!nodo)
+        return (NULL);
+
+    if (*root == NULL)
+    {
+        nodo = binary_tree_node(*root, value);
+    }
 
 
 
 
-
-    return ();
+    return (nodo);
 }
