@@ -12,11 +12,12 @@ def minOperations(n):
     num = 0
     if type(n) != int or n <= 1:
         return 0
-    while n != 1:
-        if n % 2 == 0:
-            n = n / 2
-            num = num + 2
-        else:
-            num = num + n
-            n = n / n
+    else:
+        while n != 1:
+            if n % 2 == 0:
+                n = n / 2
+                num = num + 2
+            else:
+                num = num + n
+                n = n / n
     return int(num)
