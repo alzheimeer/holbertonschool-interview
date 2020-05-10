@@ -5,11 +5,14 @@
 
 
 def minOperations(n):
+    """This method returns the number of operations to copy paste
+    Args:
+        n: given number 
+    Returns:
+        num: number of operations.
+    """
     num = 0
-
-    if (n == 1):
-        return 1
-    if (n < 1 or type(n) == float):
+    if (n < 2 or type(n) != int):
         return 0
     while (n != 1):
         if (n % 2 == 0):
