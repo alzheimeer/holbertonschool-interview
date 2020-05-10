@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """minOperations"""
- 
+
 
 def minOperations(n):
     """number of operations to copy paste
     Args:
-        n: given number 
+        n: given number
     Returns:
         num: number of operations.
     """
