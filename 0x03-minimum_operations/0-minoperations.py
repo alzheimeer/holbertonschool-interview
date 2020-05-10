@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
- minOperations
-"""
+"""minOperations"""
 
 
 def minOperations(n):
@@ -12,19 +10,19 @@ def minOperations(n):
         num: number of operations.
     """
     num = 0
-    if (n < 2 or type(n) != int):
+    if n <= 1 or type(n) != int:
         return 0
-    while (n != 1):
-        if (n % 2 == 0):
+    while n != 1:
+        if n % 2 == 0:
             n = n / 2
             num = num + 2
-        elif (n % 3 == 0):
+        elif n % 3 == 0:
             n = n / 3
             num = num + 3
-        elif (n % 5 == 0):
+        elif n % 5 == 0:
             n = n / 5
             num = num + 5
         else:
-            num = n
-            n = 1
-    return num
+            num = num + n
+            n = n / n
+    return int(num)
