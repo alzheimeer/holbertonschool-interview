@@ -3,12 +3,15 @@
  minOperations
 """
 
+
 def minOperations(n):
     num = 0
-    
 
+    if (n == 1):
+        return 1
+    if (n < 1 or type(n) == float):
+        return 0
     while (n != 1):
-        
         if (n % 2 == 0):
             n = n / 2
             num = num + 2
@@ -21,5 +24,4 @@ def minOperations(n):
         else:
             num = n
             n = 1
-        
     return num
