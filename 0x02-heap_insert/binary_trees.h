@@ -26,4 +26,6 @@ typedef struct binary_tree_s heap_t;
 void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 heap_t *heap_insert(heap_t **root, int value);
+size_t get_heap_size(heap_t *root);
+heap_t *insertwithIndex(binary_tree_t *root, int value, size_t idx, size_t nNode);
 #endif /* _BINARY_TREES_H_ */

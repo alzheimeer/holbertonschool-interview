@@ -1,33 +1,56 @@
 #include "binary_trees.h"
 
 /**
-* heap_insert - inserta un valor en un montón binario máximo
-* @root: es un puntero doble al nodo raíz del montón
-* @value: es el valor almacenado en el nodo que se va a insertar
-* Return: un puntero al nodo insertado, o NULL en caso de falla
+* heap_insert - insert node in heap max
+* @root: pointer double to root heap
+* @value: value n node to insert
+* Return: pointer to node insert or NULL if error
 */
-
 heap_t *heap_insert(heap_t **root, int value)
 {
-    size_t n = get_heap_size(*root) + 1;
+    size_t nNode = get_heap_size(*root) + 1;
     heap_t *nodo;
 
-    nodo = malloc(sizeof(heap_t));
-    if (!nodo)
-        return (NULL);
-    nodo->n = value;
-    nodo->left = NULL;
-    nodo->right = NULL;
     if (*root == NULL)
-    {
-        *root = nodo;
-		return (nodo);
-    }
+        return (*root = binary_tree_node(NULL, value));
+    nodo = insertwithIndex(*root, value, 1, nNode);
+    
+    while (nodo && nodo->parent && nodo->n > nodo->parent->n)
+	{
+		nodo->n = nodo->parent->n;
+		nodo->parent->n = value;
+		nodo = nodo->parent;
+	}
+    return (nodo);
+}
+/**
+ * insertwithIdx - Inserts node level ordered
+ * @root: Type binary_tree pointer of the parent node
+ * @value: Type int value of value inserted into node
+ * @idx: Type int index of the node
+ * @nNode: number the nodes + 1
+ * Return: Node inserted
+ */
+heap_t *insertwithIndex(binary_tree_t *root, int value, size_t idx, size_t nNode)
+{
+	heap_t *nodel, *noder;
+    size_t parent = nNode / 2;
 
-
-
-
-    return (heapify(nodo));
+	if (!root)
+		return (NULL);
+	if (idx == parent)
+	{
+		if (nNode % 2)
+			return (root->right = binary_tree_node(root, value));
+		else
+    		return (root->left = binary_tree_node(root, value));
+	}
+	nodel = insertwithIndex(root->left, value, 2 * idx , nNode);
+    noder = insertwithIndex(root->right, value, 2 * idx + 1, nNode);
+	if (nodel)
+		return (nodel);
+	else
+        return (noder);
 }
 /**
  * get_heap_size - gets number of nodes in heap
@@ -36,24 +59,10 @@ heap_t *heap_insert(heap_t **root, int value)
  */
 size_t get_heap_size(heap_t *root)
 {
+    int left, right;
 	if (!root)
 		return (0);
-	return (1 + get_heap_size(root->left) + get_heap_size(root->right));
-}
-
-/**
- * heapify - ubique to node in Max Heap
- * @node: new noden
- * Return: pointer to starting node
- */
-heap_t *heapify(heap_t *node)
-{
-	while (node && node->parent && node->n > node->parent->n)
-	{
-		node->parent->n -= node->n;
-		node->n = node->parent->n + node->n;
-		node->parent->n = node->n - node->parent->n;
-		node = node->parent;
-	}
-	return (node);
+    left = get_heap_size(root->left);
+    right = get_heap_size(root->right);
+	return (1 + left + right);
 }
