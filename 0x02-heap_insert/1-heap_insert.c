@@ -4,18 +4,16 @@
 * heap_insert - insert node in heap max
 * @root: pointer double to root heap
 * @value: value n node to insert
-* Return: pointer to node insert or NULL if error
+* Return: pointer to node insert or NULL if err
 */
 heap_t *heap_insert(heap_t **root, int value)
 {
-    size_t nNode = get_heap_size(*root) + 1;
+    size_t nNode;
     heap_t *nodo;
 
-	if (*root == NULL)
-	{
-		*root = binary_tree_node(NULL, value);
-		return (*root);
-	}
+    if (*root == NULL)
+        return (*root = binary_tree_node(NULL, value));
+    nNode = get_heap_size(*root) + 1;
     nodo = insertwithIndex(*root, value, 1, nNode);
     
     while (nodo && nodo->parent && nodo->n > nodo->parent->n)
@@ -62,7 +60,7 @@ heap_t *insertwithIndex(binary_tree_t *root, int value, size_t idx, size_t nNode
  */
 size_t get_heap_size(heap_t *root)
 {
-    int left, right;
+    int left = 0, right = 0;
 	if (!root)
 		return (0);
     left = get_heap_size(root->left);
