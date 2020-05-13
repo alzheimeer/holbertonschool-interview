@@ -1,88 +1,69 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_size - function that return the size of a tree
- * @tree: tree to check
- * Return: size of tree
- */
-
-size_t binary_tree_size(const binary_tree_t *tree)
-{
-	size_t size = 0, r = 0, l = 0;
-
-	if (tree == NULL)
-	{
-		return (0);
-	}
-	else
-	{
-		l = binary_tree_size(tree->left);
-		r = binary_tree_size(tree->right);
-		size = r + l + 1;
-	}
-	return (size);
-}
-
-/**
- * insert_ordered - Inserts node level ordered
- * @tree: Type binary_tree pointer of the parent node
- * @value: Type int value of value inserted into node
- * @idx: Type int index of the node
- * @n_leaf: Type int node array position (parent formula: idx / 2)
- * Return: Node inserted
- */
-heap_t *insert_ordered(binary_tree_t *tree, int value, int idx, int n_leaf)
-{
-	heap_t *node;
-
-	if (tree == NULL)
-	{
-		return (NULL);
-	}
-	if (idx + 1 == n_leaf / 2)
-	{
-		if (n_leaf & 1)
-		{
-			tree->right = binary_tree_node(tree, value);
-			return (tree->right);
-		}
-		else
-		{
-			tree->left = binary_tree_node(tree, value);
-			return (tree->left);
-		}
-	}
-	node = insert_ordered(tree->left, value, 2 * idx + 1, n_leaf);
-	if (node != 0)
-	{
-		return (node);
-	}
-	else
-	{
-		return (insert_ordered(tree->right, value, 2 * idx + 2, n_leaf));
-	}
-}
-/**
- * heap_insert - Insert a node into a Max binary heap
- * @root: Type heap_t pointer of the parent node
- * @value: Type int of value inserted into node
- * Return: Node inserted
- */
+* heap_insert - insert node in heap max
+* @root: pointer double to root heap
+* @value: value n node to insert
+* Return: pointer to node insert or NULL if err
+*/
 heap_t *heap_insert(heap_t **root, int value)
 {
-	heap_t *node;
+    size_t nNode;
+    heap_t *nodo;
 
-	if (*root == NULL)
+    if (*root == NULL)
+        return (*root = binary_tree_node(NULL, value));
+    nNode = get_heap_size(*root) + 1;
+    nodo = insertwithIndex(*root, value, 1, nNode);
+    
+    while (nodo && nodo->parent && nodo->n > nodo->parent->n)
 	{
-		*root = binary_tree_node(NULL, value);
-		return (*root);
+		nodo->n = nodo->parent->n;
+		nodo->parent->n = value;
+		nodo = nodo->parent;
 	}
-	node = insert_ordered(*root, value, 0, binary_tree_size(*root) + 1);
-	while (node->parent && node->n > node->parent->n)
+    return (nodo);
+}
+/**
+ * insertwithIdx - Inserts node level ordered
+ * @root: Type binary_tree pointer of the parent node
+ * @value: Type int value of value inserted into node
+ * @idx: Type int index of the node
+ * @nNode: number the nodes + 1
+ * Return: Node inserted
+ */
+heap_t *insertwithIndex(binary_tree_t *root, int value, size_t idx, size_t nNode)
+{
+	heap_t *nodel, *noder;
+    size_t parent = nNode / 2;
+
+	if (!root)
+		return (NULL);
+	if (idx == parent)
 	{
-		node->n = node->parent->n;
-		node->parent->n = value;
-		node = node->parent;
+		if (nNode % 2)
+			return (root->right = binary_tree_node(root, value));
+		else
+    		return (root->left = binary_tree_node(root, value));
 	}
-	return (node);
+	nodel = insertwithIndex(root->left, value, 2 * idx , nNode);
+    noder = insertwithIndex(root->right, value, 2 * idx + 1, nNode);
+	if (nodel)
+		return (nodel);
+	else
+        return (noder);
+}
+/**
+ * get_heap_size - gets number of nodes in heap
+ * @root: pointer to root node
+ * Return: number of nodes
+ */
+size_t get_heap_size(heap_t *root)
+{
+    int left = 0, right = 0;
+	if (!root)
+		return (0);
+    left = get_heap_size(root->left);
+    right = get_heap_size(root->right);
+	return (1 + left + right);
 }
