@@ -11,8 +11,11 @@ heap_t *heap_insert(heap_t **root, int value)
     size_t nNode = get_heap_size(*root) + 1;
     heap_t *nodo;
 
-    if (*root == NULL)
-        return (*root = binary_tree_node(NULL, value));
+	if (*root == NULL)
+	{
+		*root = binary_tree_node(NULL, value);
+		return (*root);
+	}
     nodo = insertwithIndex(*root, value, 1, nNode);
     
     while (nodo && nodo->parent && nodo->n > nodo->parent->n)
