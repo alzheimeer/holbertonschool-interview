@@ -19,6 +19,7 @@ void p(int grid[3][3])
 		printf("\n");
 	}
 }
+
 /**
 * sandpiles_sum - sandpiles addition.
 * @grid1: grid1.
