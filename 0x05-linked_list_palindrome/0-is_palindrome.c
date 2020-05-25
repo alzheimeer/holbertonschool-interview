@@ -6,25 +6,29 @@
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *aux = *head, *ini = *head;
-	int i = 0, j;
+	listint_t *ini = *head;
+	int i = 0, j = 0;
+	int l[4096];
 
 	if (head == NULL || *head == NULL)
 		return (1);
-	while (aux->next)
-		aux = aux->next, i++;
-	while (i)
+	while (ini->next)
+		ini = ini->next, i++;
+	ini = *head;
+	while (ini)
 	{
-		if (ini->n == aux->n)
-		{
-			aux = *head;
+		l[j] = ini->n;
+		ini = ini->next;
+		j++;
+	}
+	ini = *head;
+	while (ini)
+	{
+		if (ini->n == l[i])
 			ini = ini->next;
-			j = i;
-			for (i = 0; i < j - 1; i++)
-				aux = aux->next;
-		}
 		else
 			return (0);
+		i--;
 	}
 	return (1);
 }
