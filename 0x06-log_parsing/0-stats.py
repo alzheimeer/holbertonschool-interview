@@ -1,19 +1,27 @@
 #!/usr/bin/python3
-import sys
 """prints logs"""
+import sys
 
 
 def imp(fs, e0, e1, e2, e3, e4, e5, e6, e7):
     """Method to print"""
-    print("File size: {0}".format(fs))
-    print("200: {0}".format(e0))
-    print("301: {0}".format(e1))
-    print("400: {0}".format(e2))
-    print("401: {0}".format(e3))
-    print("403: {0}".format(e4))
-    print("404: {0}".format(e5))
-    print("405: {0}".format(e6))
-    print("500: {0}".format(e7))
+    print("File size: {}".format(fs))
+    if (e0 > 0):
+        print("200: {}".format(e0))
+    if (e1 > 0):
+        print("301: {}".format(e1))
+    if (e2 > 0):
+        print("400: {}".format(e2))
+    if (e3 > 0):
+        print("401: {}".format(e3))
+    if (e4 > 0):
+        print("403: {}".format(e4))
+    if (e5 > 0):
+        print("404: {}".format(e5))
+    if (e6 > 0):
+        print("405: {}".format(e6))
+    if (e7 > 0):
+        print("500: {}".format(e7))
 
 if __name__ == "__main__":
     """MAIN"""
@@ -35,7 +43,7 @@ if __name__ == "__main__":
                 c = 0
 
             s = line.split()
-            n = s[7]
+            n = s[-2]
             if n == "200":
                 e0 = e0 + 1
             elif n == "301":
@@ -52,7 +60,7 @@ if __name__ == "__main__":
                 e6 = e6 + 1
             elif n == "500":
                 e7 = e7 + 1
-            fs = fs + int(s[8])
+            fs = fs + int(s[-1])
             line = sys.stdin.readline()
             c = c + 1
     except KeyboardInterrupt:
