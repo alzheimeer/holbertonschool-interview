@@ -38,31 +38,32 @@ if __name__ == "__main__":
     line = sys.stdin.readline()
     try:
         while line:
-            if c == 10:
-                imp(fs, e0, e1, e2, e3, e4, e5, e6, e7)
-                c = 0
-
             s = line.split()
-            n = s[-2]
-            if n == "200":
-                e0 = e0 + 1
-            elif n == "301":
-                e1 = e1 + 1
-            elif n == "400":
-                e2 = e2 + 1
-            elif n == "401":
-                e3 = e3 + 1
-            elif n == "403":
-                e4 = e4 + 1
-            elif n == "404":
-                e5 = e5 + 1
-            elif n == "405":
-                e6 = e6 + 1
-            elif n == "500":
-                e7 = e7 + 1
-            fs = fs + int(s[-1])
-            line = sys.stdin.readline()
-            c = c + 1
+            if len(s) > 6:
+                if c == 10:
+                    imp(fs, e0, e1, e2, e3, e4, e5, e6, e7)
+                    c = 0
+
+                n = s[-2]
+                if n == "200":
+                    e0 = e0 + 1
+                elif n == "301":
+                    e1 = e1 + 1
+                elif n == "400":
+                    e2 = e2 + 1
+                elif n == "401":
+                    e3 = e3 + 1
+                elif n == "403":
+                    e4 = e4 + 1
+                elif n == "404":
+                    e5 = e5 + 1
+                elif n == "405":
+                    e6 = e6 + 1
+                elif n == "500":
+                    e7 = e7 + 1
+                fs = fs + int(s[-1])
+                line = sys.stdin.readline()
+                c = c + 1
     except KeyboardInterrupt:
         imp(fs, e0, e1, e2, e3, e4, e5, e6, e7)
         raise
