@@ -8,38 +8,11 @@
  **/
 int is_palindrome(unsigned long n)
 {
-	size_t count = intLength(n), c1 = intLength(n);
-	size_t i;
+	unsigned long rev = 0, a = 0, num = n;
 
-	if (count == 0)
-		return (0);
-	char cadena[count];
-	char cadena2[count];
-
-	itoa(n, cadena, 10);
-	itoa(n, cadena2, 10);
-
-	for (i = 0; i < c1; i++)
-	{
-		cadena2[i] = cadena[count - 1];
-		count--;
-	}
-	if (strcmp(cadena, cadena2) == 0)
+	for (;n != 0; n = n / 10)
+		a = n % 10, rev = rev * 10 + a;
+	if (rev == num)
 		return (1);
-	else
-		return (0);
-}
-
-/**
- * intLength - Count long n
- * @i: number
- * Return: number of long
- **/
-int intLength(unsigned long i)
-{
-	int l = 0;
-
-	for (; i; i /= 10)
-		l++;
-	return (l == 0 ? 1 : l);
+	return (0);
 }
