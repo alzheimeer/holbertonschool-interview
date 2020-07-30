@@ -14,7 +14,7 @@ def cposition(b, row, col):
 
 
 def check(b, col):
-    '''backtracking'''
+    '''backtracking '''
     n = len(b)
     if col is n:
         print(str([[c, b[c]] for c in range(n)]))
