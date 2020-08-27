@@ -9,7 +9,7 @@ def rain(walls):
 
     if walls is None or walls == []:
         return 0
-    if len(walls) <= 1:
+    if len(walls) == 1:
         return 0
 
     n = len(walls)
