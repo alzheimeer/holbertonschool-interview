@@ -15,7 +15,8 @@ def rain(walls):
     n = len(walls)
     water = 0
 
-    for i in range(1, n-1):
-        water += walls[i]
+    for i in range(0, n):
+        if walls[i] > 1:
+            water += (walls[i]-1)
 
     return water
