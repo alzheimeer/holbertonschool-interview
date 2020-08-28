@@ -5,18 +5,18 @@ Rain
 
 
 def rain(walls):
-    """ calculate how much water - The first and last are ignored"""
-
-    if walls is None or walls == []:
-        return 0
-    if len(walls) == 1:
-        return 0
-
     n = len(walls)
+    if (n <= 0):
+        return (0)
     water = 0
 
-    for i in range(0, n):
-        if walls[i] > 1:
-            water += (walls[i]-1)
-
-    return water
+    for i in range(1, n - 1):
+        p1 = walls[i]
+        for j in range(i):
+            p1 = max(p1, walls[j])
+        p2 = walls[i]
+        for j in range(i + 1, n):
+            p2 = max(p2, walls[j])
+        x = min(p1, p2)
+        water += x - walls[i]
+    return (water)
