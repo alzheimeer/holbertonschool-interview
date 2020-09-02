@@ -21,7 +21,7 @@ void heap_sort(int *array, size_t size)
 
 	if (size < 2)
 		return;
-	while (len)
+	while (len > 1)
 	{
 		i_ult = size - 1;
 		padre = (i_ult - 1) / 2;
