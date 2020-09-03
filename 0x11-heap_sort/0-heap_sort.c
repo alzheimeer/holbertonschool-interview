@@ -1,3 +1,4 @@
+#include "sort.h"
 /**
  * verify - verify childs of father
  * @array: The array to be printed
