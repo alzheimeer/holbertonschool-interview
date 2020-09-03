@@ -9,31 +9,29 @@
  */
 void verify(int *array, size_t size, int father, int sizes)
 {
-    int left, right, tmp, pepe = 0;
+	int left, right, tmp, pepe = 0;
 
-    left = 2 * father + 1;
-    right = 2 * father + 2;
-    if (right <= sizes)
-    {
-	    if (array[left] > array[right]
-		&& array[left] > array[father] && left <= sizes)
-		    pepe = left;
-	    if (array[right] > array[left] && array[right] > array[father])
-		    pepe = right;
-    }
-    else
-	    if (array[left] > array[father] && left <= sizes)
-		    pepe = left;
-
-    if(pepe != 0)
-    {
-	    tmp = array[pepe];
-	    array[pepe] = array[father];
-	    array[father] = tmp;
-	    print_array(array, size);
-	    verify(array, size, pepe, sizes);
-    }
-
+	left = 2 * father + 1;
+	right = 2 * father + 2;
+	if (right <= sizes)
+	{
+		if (array[left] > array[right]
+		    && array[left] > array[father] && left <= sizes)
+			pepe = left;
+		if (array[right] > array[left] && array[right] > array[father])
+			pepe = right;
+	}
+	else
+		if (array[left] > array[father] && left <= sizes)
+			pepe = left;
+	if (pepe != 0)
+	{
+		tmp = array[pepe];
+		array[pepe] = array[father];
+		array[father] = tmp;
+		print_array(array, size);
+		verify(array, size, pepe, sizes);
+	}
 }
 
 /**
@@ -49,17 +47,17 @@ void verify(int *array, size_t size, int father, int sizes)
 void heap_sort(int *array, size_t size)
 {
 	int tmp;
-        int len = size, sizes = size - 1;
-        int father;
+	int len = size, sizes = size - 1;
+	int father;
 
-        if (size < 2)
+	if (size < 2)
 		return;
 	while (len > 1)
 	{
-		while(sizes)
+		while (sizes)
 		{
-		        father =  (sizes - 1) / 2;
-			verify(array, size, father, len-1);
+			father =  (sizes - 1) / 2;
+			verify(array, size, father, len - 1);
 			sizes--;
 		}
 		tmp = array[0];
