@@ -1,7 +1,39 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "sort.h"
+/**
+ * verify - verify childs of father
+ * @array: The array to be printed
+ * @father: father
+ * @size: Number of elements in array
+ * @sizes: number limit
+ * Return: None
+ */
+void verify(int *array, size_t size, int father, int sizes)
+{
+    int left, right, tmp, pepe = 0;
 
+    left = 2 * father + 1;
+    right = 2 * father + 2;
+    if (right <= sizes)
+    {
+	    if (array[left] > array[right]
+		&& array[left] > array[father] && left <= sizes)
+		    pepe = left;
+	    if (array[right] > array[left] && array[right] > array[father])
+		    pepe = right;
+    }
+    else
+	    if (array[left] > array[father] && left <= sizes)
+		    pepe = left;
+
+    if(pepe != 0)
+    {
+	    tmp = array[pepe];
+	    array[pepe] = array[father];
+	    array[father] = tmp;
+	    print_array(array, size);
+	    verify(array, size, pepe, sizes);
+    }
+
+}
 
 /**
  * heap_sort - Heap Sort
@@ -15,40 +47,25 @@
  */
 void heap_sort(int *array, size_t size)
 {
-	size_t len = size, root, temp;
-	ssize_t i_ult, padre;
-	int tempA;
+	int tmp;
+        int len = size, sizes = size - 1;
+        int father;
 
-	if (size < 2)
+        if (size < 2)
 		return;
 	while (len > 1)
 	{
-		i_ult = size - 1;
-		padre = (i_ult - 1) / 2;
-		while (padre >= 0)
+		while(sizes)
 		{
-			padre--;
-			root = padre;
-			while ((2 * root + 1) < len)
-			{
-				temp = root;
-				if (array[(2 * root + 1)] > array[root])
-					temp = (2 * root + 1);
-				if (2 * root + 2 < len && array[2 * root + 2] > array[temp])
-					temp = 2 * root + 2;
-				if (temp == root)
-					break;
-				tempA = array[root];
-				array[root] = array[temp];
-				array[temp] = tempA;
-				print_array(array, size);
-				root = temp;
-			}
+		        father =  (sizes - 1) / 2;
+			verify(array, size, father, len-1);
+			sizes--;
 		}
-		tempA = array[0];
+		tmp = array[0];
 		array[0] = array[len - 1];
-		array[len - 1] = tempA;
+		array[len - 1] = tmp;
 		print_array(array, size);
 		len--;
+		sizes = len - 1;
 	}
 }
