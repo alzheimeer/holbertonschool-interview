@@ -53,7 +53,7 @@ int aaa(int *array, size_t size, int value, int l, int h)
 	if (array[m] < value)
 		l = m + 1;
 	else if (array[m] > value)
-		h = m - 1;
+		h = m;
 	else if (array[m] == value && array[m - 1] == value)
 		h = m;
 	else
