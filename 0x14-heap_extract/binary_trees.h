@@ -42,6 +42,6 @@ void _binary_tree_delete(binary_tree_t *tree);
 heap_t *array_to_heap(int *array, size_t size);
 int heap_extract(heap_t **root);
 int reorden(heap_t **root);
-
+void verify(heap_t **x);
 
 #endif /* L_M */
