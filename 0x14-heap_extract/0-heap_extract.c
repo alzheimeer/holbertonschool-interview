@@ -47,37 +47,38 @@ int reorden(heap_t **root)
 		if ((*root)->parent->left->n == (*root)->n)
 		{
 			x = x->parent, x->left = NULL, free(*root);
-			return;
+			return (0);
 		}
 		if ((*root)->parent->right->n == (*root)->n)
 		{
 			x = x->parent, x->right = NULL, free(*root);
-			return;
+			return (0);
 		}
-		return;
+		return (0);
 	}
 	if (!(*root)->left && (*root)->right)
 	{
 		(*root)->n = (*root)->right->n, (*root)->right->n = 0;
 		reorden(&(*root)->right);
-		return;
+		return (0);
 	}
 	else if (!(*root)->right && (*root)->left)
 	{
 		(*root)->n = (*root)->left->n, (*root)->left->n = 0;
 		reorden(&(*root)->left);
-		return;
+		return (0);
 	}
 	if ((*root)->left->n > (*root)->right->n)
 	{
 		(*root)->n = (*root)->left->n, (*root)->left->n = 0;
 		reorden(&(*root)->left);
-		return;
+		return (0);
 	}
 	else if ((*root)->left->n < (*root)->right->n)
 	{
 		(*root)->n = (*root)->right->n, (*root)->right->n = 0;
 		reorden(&(*root)->right);
-		return;
+		return (0);
 	}
+	return(0);
 }
