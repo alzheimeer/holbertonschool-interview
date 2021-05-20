@@ -30,11 +30,6 @@ int is_error(int argc, char **argv)
 			}
 		}
 	}
-	if (argv[1][0] == '0' || argv[2][0] == '0')
-	{
-		printf("0\n");
-		return (EXIT_SUCCESS);
-	}
 	return (0);
 }
 
@@ -53,7 +48,11 @@ int main(int argc, char **argv)
 
 	is_error(argc, argv);
 	len1 = strlen(argv[1]), len2 = strlen(argv[2]);
-
+	if (argv[1][0] == '0' || argv[2][0] == '0')
+	{
+		printf("0\n");
+		return (EXIT_SUCCESS);
+	}
 	result = calloc(len1 + len2, sizeof(*result));
 	if (!result)
 		return (EXIT_FAILURE);
